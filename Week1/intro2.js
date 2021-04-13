@@ -119,7 +119,7 @@ const goat = {
   makeSound() {
     console.log('baaa');
   },
-  diet: function () {
+  diet() {
     console.log("diet Type is ", this.dietType);
   }
 };
@@ -213,6 +213,8 @@ const person2 = {
     }
   }
 };
+person2.age = 29;
+console.log(person2);
 
 //EXAMPLE SETTERS
 const robot4 = {
