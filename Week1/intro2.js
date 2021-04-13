@@ -1,32 +1,32 @@
 // EXERCISE NUMBER 6
 
-// let spaceship = {
-//   'Fuel Type' : 'Turbo Fuel',
-//   homePlanet : 'Earth'
-// };
+let spaceship = {
+  'Fuel Type': 'Turbo Fuel',
+  homePlanet: 'Earth'
+};
 
 // //Write a function greenEnergy() that has an object as a parameter and sets that object’s 'Fuel Type' property to 'avocado oil'.
 // //Write a function remotelyDisable() that has an object as a parameter and sets (or reassigns) that object’s disabled property to true.
 // //Call your two functions with the spaceship object in the code editor, then console.log() the spaceship object to confirm those properties were changed/added.
 
-// const greenEnergy = (obj) => {
-//   obj["Fuel Type"] = "avocado oil";
-//   return spaceship;
-// }
+const greenEnergy = (obj) => {
+  obj["Fuel Type"] = "avocado oil";
+  return spaceship;
+}
 
-// const remotelyDisable = (obj) => {
-//   obj.disabled = true;
-//   return spaceship;
-// }
-// greenEnergy(spaceship);
-// remotelyDisable(spaceship);
-// console.log(spaceship);
+const remotelyDisable = (obj) => {
+  obj.disabled = true;
+  return spaceship;
+}
+greenEnergy(spaceship);
+remotelyDisable(spaceship);
+console.log(spaceship);
 
 //*******************************************************
 
 // EXERCISE NUMBER 7
 
-let spaceship = {
+let spaceship2 = {
   crew: {
     captain: {
       name: 'Lily',
@@ -51,24 +51,26 @@ let spaceship = {
   }
 };
 
-let crewArray = [];
 let crewRole;
 let crewName;
+let crewDegree;
 
-console.log(spaceship);
+let crewObj = new Object(spaceship2.crew); //create a new object
 
-for (let key in spaceship.crew) {
-  let crewRoleArray = Object.getOwnPropertyNames(spaceship.crew); //array length 4
-  console.log("crewRoleArray is ", crewRoleArray)
-
-  crewName = spaceship.crew[key]["name"];
-  crewRole = crewRoleArray[0]
-  crewArray.push({ crewRole: crewName });
-  //console.log(crewArray);
+for (let key in crewObj) {
+  crewName = crewObj[key]["name"];
+  crewRole = key;
+  console.log(`${crewRole}: ${crewName}`);
 }
-console.log(crewArray);
+
+for (const key in crewObj) {
+  crewName = crewObj[key]["name"];
+  crewDegree = crewObj[key]["degree"];
+  console.log(`${crewName}: ${crewDegree}`);
+}
 
 //Using for...in, iterate through the spaceship.crew object in the code editor and console.log() a list of crew roles and names in the following format: '[crew member's role]: [crew member's name]', e.g.,'chief officer: Dan'.
+
 //Using for...in, iterate through the spaceship.crew object in the code editor and console.log() a list of crew names and degrees in the following format: '[crew member's name]: [crew member's degree]', i.e.,'Lily: Computer Engineering'.
 
 
@@ -95,14 +97,14 @@ robot["energyLevel"] = 100;
 console.log(robot);
 
 //2) and 3)
-const robot = {
+const robot1 = {
   model: "1E78V2",
   energyLevel: 100,
   provideInfo() {
     return `I am ${this.model} and my current energy level is ${this.energyLevel}`;
   }
 }
-console.log(robot.provideInfo());
+console.log(robot1.provideInfo());
 
 // 1)Let’s create a new object to practice using this.
 // In main.js there is an object robot, add a property of model and assign to it a value of '1E78V2'. Add another property, energyLevel and assign to it a value of 100.
@@ -111,57 +113,49 @@ console.log(robot.provideInfo());
 // Replace ‘MODEL’ and ‘ENERGYLEVEL’ with the calling object’s model and energyLevel property. Remember, to get the access to the calling object’s properties inside a method, you have to use the this keyword!
 // 3)Now to check .provideInfo() has access to the internal properties of robot. Log the result of calling .provideInfo() method on robot to the console.
 
-
 //ARROW FUNCTION & 'THIS'
 const goat = {
   dietType: 'herbivore',
   makeSound() {
     console.log('baaa');
   },
-  diet: () => {
-    console.log(this.dietType);
+  diet: function () {
+    console.log("diet Type is ", this.dietType);
   }
 };
 
-goat.diet(); // Prints undefined!!!!!!!!!!
+goat.diet(); // Prints undefined!!!!!!!!! --> refactorred
 
 //So what happened? Notice that in the .diet() is defined using an arrow function.
 //Arrow functions inherently bind, or tie, an already defined this value to the function itself that is NOT the calling object. In the code snippet above, the value of this is the global object, or an object that exists in the global scope, which doesn’t have a dietType property and therefore returns undefined.
 
 //EXERCISE NUMBER 8
 
-const robot = {
+const robot2 = {
   energyLevel: 100,
-  checkEnergy: () => {
+  checkEnergy: function () {
     console.log(`Energy is currently at ${this.energyLevel}%.`)
   }
 }
-
-robot.checkEnergy();
-
+robot2.checkEnergy();
+console.log(robot2);
 // 1) Currently the .checkEnergy() method is not producing the correct output because it is using arrow function syntax.
 // Refactor, or change, the method to use a function expression. You can write the function using either longhand or shorthand format.
 // After refactoring the method, notice that .checkEnergy() has access to the other internal properties of the robot object.
 
-
 //EXERCISE NUMBER 9
 
 // Here’s an example of using _ to prepend a property.
-
 const bankAccount = {
   _amount: 1000
 }
 // In the example above, the _amount is not intended to be directly manipulated.
-
 // Even so, it is still possible to reassign _amount:
 
 bankAccount._amount = 1000000;
 
 //*******************************************************
 //*******************************************************
-//*******************************************************
-//*******************************************************
-
 
 //GETTER METHODS
 
@@ -183,26 +177,25 @@ person.fullName; // 'John Doe'
 //////////////////////////////
 //GETTER EXAMPLE
 
-const robot = {
+const robot3 = {
   _model: '1E78V2',
   _energyLevel: 100,
+  get energyLevel() {
+    if (typeof (this._energyLevel) === "number") {
+      return `My current energy level is ${this._energyLevel}`;
+    } else {
+      return 'System malfunction: cannot retrieve energy level';
+    }
+  }
 };
-
+console.log(robot3.energyLevel);
 
 //1)In robot, create a getter method named energyLevel using the get keyword. Leave function body blank for now.
-
 //2)Inside the getter method, add an if statement to check if this._energyLevel is a number using the typeof operator. If that condition is truthy, return 'My current energy level is ENERGYLEVEL'. Replace ENERGYLEVEL with the value of this._energyLevel.
-
 //Make sure you return the string and not logging it to the console.
-
-
 //3) If this._energyLevel isn’t a number it could be that the _energyLevel property was altered. Let’s add a default return statement for when such a scenario arises.
-
 //Add an else statement that returns 'System malfunction: cannot retrieve energy level'.
-
-
 //4) Log the result of calling the getter method energyLevel on robot to the console.
-
 //Notice that the method will return a formatted response rather than just accessing a property!
 
 
@@ -210,7 +203,7 @@ const robot = {
 
 //Along with getter methods, we can also create setter methods which reassign values of existing properties within an object. Let’s see an example of a setter method:
 
-const person = {
+const person2 = {
   _age: 37,
   set age(newAge) {
     if (typeof newAge === 'number') {
@@ -222,7 +215,7 @@ const person = {
 };
 
 //EXAMPLE SETTERS
-const robot = {
+const robot4 = {
   _model: '1E78V2',
   _energyLevel: 100,
   _numOfSensors: 15,
@@ -230,10 +223,19 @@ const robot = {
     if (typeof this._numOfSensors === 'number') {
       return this._numOfSensors;
     } else {
-      return 'Sensors are currently down.'
+      return 'Sensors are currently down.';
     }
   },
+  set numOfSensors(num) {
+    if ((typeof num === "number") && (num >= 0)) {
+      return this._numOfSensors = num;
+    } else {
+      return console.log('Pass in a number that is greater than or equal to 0');
+    }
+  }
 };
+robot4.numOfSensors = 100;
+console.log(robot4.numOfSensors);
 
 
 //1)Currently, in robot there is a getter method for numOfSensors but no setter method! What if we need to add or remove some sensors? Let’s fix that problem.
