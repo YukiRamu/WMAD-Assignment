@@ -1,10 +1,10 @@
 /* Parent class */
 class Media {
   // create an object with a constructor function
-  constructor(param) {
-    this._title = param._title;
-    this._isCheckedOut = param._isCheckedOut; //default = false
-    this._ratings = param._ratings; //defaut = empty array
+  constructor(title) {
+    this._title = title;
+    this._isCheckedOut = false; //default = false
+    this._ratings = []; //defaut = empty array
   }
   //define getter and setter
   get mediaInfo() {
@@ -15,19 +15,20 @@ class Media {
   }
   //define the mothods
   toggleCheckOutStatus = () => {
-    if (_isCheckedOut) {
-      _isCheckedOut = false;
+    if (this._isCheckedOut) {
+      this._isCheckedOut = false;
     } else {
-      _isCheckedOut = true;
+      this._isCheckedOut = true;
     };
-    return this, _isCheckedOut;
+    return this._isCheckedOut;
   }
   getAverageRating = () => {
-    return this, ratings.reduce((a, b) => { (a + b) / ratings.length, 0 }); //calc average
+    let ave = this._ratings.reduce((a, b) => (a + b)) / this._ratings.length;//calc average
+    return ave;
   }
-  addRating = (rate) => {
-    ratings.push(rate);
-    return this, ratings;
+  addRating = (...rate) => {
+    this._ratings.push(...rate);
+    return this;
   }
 };
 
@@ -35,10 +36,9 @@ class Media {
 //Book
 class Book extends Media {
   constructor(author, title, pages) {
-    super(bookData); // inheriting from parant class
-    this._title = bookData._title;
-    this._author = author._author; //specific for the child class
-    this.pages = pages._pages; //specific for the child class
+    super(title); // inheriting from parant class
+    this._author = author; //specific for the child class
+    this._pages = pages; //specific for the child class
   }
   //define getter only for the child class
   get bookInfo() {
@@ -48,9 +48,10 @@ class Book extends Media {
 
 //Movie
 class Movie extends Media {
-  constructor(director, runTime) {
-    this._director = director._director;
-    this._runTime = runTime._runTime;
+  constructor(director, runTime, title) {
+    super(title);
+    this._director = director;
+    this._runTime = runTime;
   }
   //define getter only for the child class
   get movieInfo() {
@@ -59,7 +60,7 @@ class Movie extends Media {
 }
 
 /* Instance manipulation */
-//create a book instance
+// ===== #1 create a book instance
 const historyOfEverything = new Book({
   Author: "Bill Bryson",
   Title: "A Short History of Nearly Everything",
@@ -69,11 +70,15 @@ const historyOfEverything = new Book({
 //call the method in Book class and log the values
 console.log(historyOfEverything.toggleCheckOutStatus());
 
-historyOfEverything.addRating(4).addRating(5).addRating(5); //method chaning (must write return this in the class)
+//method chaining (must write return this in the class)
+//historyOfEverything.addRating(4).addRating(5).addRating(5); //worked
 
-console.log(historyOfEverything.getAverageRating());
+//instead of method chaining, go with the rest operator
+historyOfEverything.addRating(4, 5, 5)
 
-//create a movie instance
+console.log(historyOfEverything.getAverageRating()); //undefined
+
+//===== #2 create a movie instance
 const speed = new Movie({
   Director: "Jan de Bont",
   Title: "Speed",
@@ -83,6 +88,7 @@ const speed = new Movie({
 //call the method in Movie class and log the values
 console.log(historyOfEverything.toggleCheckOutStatus());
 
-speed.addRating(1).addRating(1).addRating(5); //method chaning (must write return this in the class)
+//method chaining (must write return this in the class)
+speed.addRating(1, 5, 5);
 
 console.log(speed.getAverageRating());
