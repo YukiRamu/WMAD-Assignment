@@ -28,7 +28,15 @@ class Media {
   }
   addRating = (...rate) => {
     this._ratings.push(...rate);
-    return this;
+    //Validation check (rate between 1 and 5)
+    if ((this._ratings.some((num) => {
+      return num > 5 || num < 1
+    })) === true) {
+      alert("invalid rate value");
+      return false;
+    } else {
+      return this;
+    }
   }
 };
 
@@ -59,6 +67,24 @@ class Movie extends Media {
   }
 }
 
+//CD
+class CD extends Media {
+  constructor(artist, title, songs) {
+    super(title);
+    this._artist = artist;
+    this._songs = songs;
+  }
+  get cdInfo() {
+    return this._artist, this._songs;
+  }
+  shuffle() {
+    return this._songs.sort();
+  }
+}
+
+//////// Under Construction///////////////
+// Create class called Catalog that holds all of the Media items in our library.
+
 /* Instance manipulation */
 // ===== #1 create a book instance
 const historyOfEverything = new Book({
@@ -70,11 +96,11 @@ const historyOfEverything = new Book({
 //call the method in Book class and log the values
 console.log(historyOfEverything.toggleCheckOutStatus());
 
-//method chaining (must write return this in the class)
+//method chaining (must write ONLY return this in the class)
 //historyOfEverything.addRating(4).addRating(5).addRating(5); //worked
 
 //instead of method chaining, go with the rest operator
-historyOfEverything.addRating(4, 5, 5)
+historyOfEverything.addRating(4, 6, 5)
 
 console.log(historyOfEverything.getAverageRating()); //undefined
 
