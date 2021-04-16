@@ -79,3 +79,31 @@ const alSmith = new HighSchool('Al E. Smith', 415, ['Baseball', 'Basketball', 'V
 alSmith.highSchoolInfo; //call getter --> without parenthesis
 
 
+/* Create a catalog class that holds a collection of School */
+class SchoolCatalog {
+  constructor() {
+    this._primary = [];
+    this._middle = [];
+    this._high = [];
+  }
+  addPrimary(...school) {
+    this._primary.push(...school);
+    console.log(this._primary);
+  }
+  addHigh(...school) {
+    this._high.push(...school);
+    console.log(this._high);
+  }
+}
+
+const VancouverPrimary = new PrimarySchool('Vancouver primary', 222, 'Students must be picked up by a parent');
+
+const CICCC = new HighSchool('CICCC', 100, ['Web', 'mobile', 'hoslitality', 'marketing']);
+
+//instance
+const catalogItem = new SchoolCatalog();
+catalogItem.addPrimary(lorraineHansbury, VancouverPrimary);
+catalogItem.addHigh(alSmith, CICCC);
+
+
+

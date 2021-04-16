@@ -80,6 +80,7 @@ class CD extends Media {
   shuffle() {
     return this._songs.sort();
   }
+  // upgrade: Create a method called shuffle for the CD class. The method returns a randomly sorted array of all the songs in the songs property.
 }
 
 /* Instance manipulation */
@@ -119,7 +120,6 @@ class Catalog {
     this._cdArray = [];
   }
   addBook(...item) {
-    console.log(...item)
     this._bookArray.push(...item);
     console.log(this._bookArray);
   }
