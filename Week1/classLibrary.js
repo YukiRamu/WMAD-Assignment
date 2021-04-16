@@ -56,7 +56,7 @@ class Book extends Media {
 
 //Movie
 class Movie extends Media {
-  constructor(director, runTime, title) {
+  constructor(director, title, runTime) {
     super(title);
     this._director = director;
     this._runTime = runTime;
@@ -82,35 +82,9 @@ class CD extends Media {
   }
 }
 
-//////// Under Construction///////////////
-// Create class called Catalog that holds all of the Media items in our library.
-//Catalog which holds Array of book, cds and movies
-//It can have methods as addBook,addMovie, addCD, getCD...
-
-class Catalog extends Media {
-  constructor () {
-    this._bookArray = [];
-    this._movieArray = [];
-    this._cdArray = [];
-  }
-  addBook() {
-
-  }
-  addMovie() {
-
-  }
-  addCD() {
-
-  }
-}
-
 /* Instance manipulation */
 // ===== #1 create a book instance
-const historyOfEverything = new Book({
-  Author: "Bill Bryson",
-  Title: "A Short History of Nearly Everything",
-  Pages: 544
-});
+const historyOfEverything = new Book("Bill Bryson", "A Short History of Nearly Everything", 544);
 
 //call the method in Book class and log the values
 console.log(historyOfEverything.toggleCheckOutStatus());
@@ -124,11 +98,7 @@ historyOfEverything.addRating(4, 5, 5)
 console.log(historyOfEverything.getAverageRating()); //undefined
 
 //===== #2 create a movie instance
-const speed = new Movie({
-  Director: "Jan de Bont",
-  Title: "Speed",
-  Runtime: 116
-});
+const speed = new Movie("Jan de Bont", "Speed", 116);
 
 //call the method in Movie class and log the values
 console.log(historyOfEverything.toggleCheckOutStatus());
@@ -137,3 +107,49 @@ console.log(historyOfEverything.toggleCheckOutStatus());
 speed.addRating(1, 5, 5);
 
 console.log(speed.getAverageRating());
+
+// Create class called Catalog that holds all of the Media items in our library.
+// Catalog which holds Array of book, cds and movies
+// It can have methods as addBook,addMovie, addCD, getCD...
+
+class Catalog {
+  constructor() {
+    this._bookArray = [];
+    this._movieArray = [];
+    this._cdArray = [];
+  }
+  addBook(...item) {
+    console.log(...item)
+    this._bookArray.push(...item);
+    console.log(this._bookArray);
+  }
+  addMovie(...item) {
+    this._movieArray.push(...item);
+    console.log(this._movieArray);
+  }
+  addCD(...item) {
+    this._cdArray.push(...item);
+    console.log(this._cdArray);
+  }
+};
+
+//test instances for Catalog class
+const bookItem = new Book("Jon Park", "Gone with the wind", 555);
+const bookItem2 = new Book("Mary Lynn", "Fast and Furious", 759);
+const bookItem3 = new Book("Jon Park", "Chance", 555);
+
+const cdItem = new CD("Jon Park", "album1", "song1");
+const cdItem2 = new CD("Mary Lynn", "album2", "song2");
+const cdItem3 = new CD("Jon Park", "album3", "song2");
+
+const movieItem = new Movie("Jon Park", "Matrix", 120);
+const movieItem2 = new Movie("Mary Lynn", "Jurassic Park", 190);
+const movieItem3 = new Movie("Jon Park", "Taken", 75);
+
+//call method in Catalog
+//#1 create an instance for Catalog
+//#2 call the method
+const catalogItem = new Catalog();
+catalogItem.addBook(bookItem, bookItem2, bookItem3);
+catalogItem.addMovie(cdItem, cdItem2, cdItem3);
+catalogItem.addCD(movieItem, movieItem2, movieItem3);
