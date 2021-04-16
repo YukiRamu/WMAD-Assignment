@@ -84,6 +84,25 @@ class CD extends Media {
 
 //////// Under Construction///////////////
 // Create class called Catalog that holds all of the Media items in our library.
+//Catalog which holds Array of book, cds and movies
+//It can have methods as addBook,addMovie, addCD, getCD...
+
+class Catalog extends Media {
+  constructor () {
+    this._bookArray = [];
+    this._movieArray = [];
+    this._cdArray = [];
+  }
+  addBook() {
+
+  }
+  addMovie() {
+
+  }
+  addCD() {
+
+  }
+}
 
 /* Instance manipulation */
 // ===== #1 create a book instance
@@ -100,7 +119,7 @@ console.log(historyOfEverything.toggleCheckOutStatus());
 //historyOfEverything.addRating(4).addRating(5).addRating(5); //worked
 
 //instead of method chaining, go with the rest operator
-historyOfEverything.addRating(4, 6, 5)
+historyOfEverything.addRating(4, 5, 5)
 
 console.log(historyOfEverything.getAverageRating()); //undefined
 
