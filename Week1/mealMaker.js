@@ -62,7 +62,7 @@ const menuObj = {
     //Calculate total price
     const total = appetizer._dishprice + main._dishprice + dessert._dishprice
 
-    return console.log(`Toatl price is $${total}. Meal contains ${appetizer._dishname}, ${main._dishname},${dessert._dishname}`)
+    return console.log(`Toatl price is $${total}. Meal contains ${appetizer._dishname}, ${main._dishname}, and ${dessert._dishname}`)
   }
 };
 
