@@ -7,25 +7,62 @@ const team = {
   _players: [],
   _games: [],
   get players() {
-    return this._players
+    return this._players;
   },
   get games() {
-    return this._games
+    return this._games;
   },
-  addPlayer = (firstName, lastName, age) => {
+  addPlayer: (firstName, lastName, age) => {
     //create a player object, and add them to the team‘s players array.
     return team._players.push({
       firstname: firstName,
       lastname: lastName,
       Age: age
     });
+  },
+  addGame: (opponentName, teamPoints, opponentPoints) => {
+    return team._games.push({
+      opponent: opponentName,
+      teamPoints: teamPoints,
+      opponentPoints: opponentPoints
+    });
   }
 }
 
-const players = {
+// addGame that:
+
+// takes in an opponent’s name,
+// your team’s points,
+// the opponent’s points,
+// creates a game object,
+// adds the game object to your team‘s games array.
+
+// 9.
+// Invoke your addGame method on three games and print the team‘s updated games array.
+
+//test data
+const player1 = {
   firstName: 'Pablo',
   lastName: 'Sanchez',
   age: 11
+}
+
+const player2 = {
+  firstName: 'Steph',
+  lastName: 'Curry',
+  age: 28
+}
+
+const player3 = {
+  firstName: 'Lisa',
+  lastName: 'Leslie',
+  age: 44
+}
+
+const player4 = {
+  firstName: 'Bugs',
+  lastName: 'Bunny',
+  age: 76
 }
 
 const games = {
@@ -34,5 +71,26 @@ const games = {
   opponentPoints: 27
 }
 
-//test
-//Steph Curry Age 28,Lisa Leslie Age 44, and Bugs Bunny Age 76.
+const games2 = {
+  opponent: 'Canucks',
+  teamPoints: 10,
+  opponentPoints: 2
+}
+
+const games3 = {
+  opponent: 'Oylers',
+  teamPoints: 9,
+  opponentPoints: 7
+}
+
+const games4 = {
+  opponent: 'Maple Leafs',
+  teamPoints: 4,
+  opponentPoints: 7
+}
+
+team._players.push(player1, player2, player3, player4);
+console.log(team._players);
+
+team._games.push(games, games2, games3, games4);
+console.log(team.games);
