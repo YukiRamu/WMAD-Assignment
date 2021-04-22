@@ -106,13 +106,25 @@ const library2 = [
     libraryID: 3245
   }];
 
+let sortedLibrary2 = [];
+let resultArray = [];
 
 const sortObject = () => {
-  const sortedLibrary2 = library2.sort((a, b) => a.libraryID - b.libraryID);
-  console.log(sortedLibrary2);
+  sortedLibrary2 = library2.sort((a, b) => {
+    return b.libraryID - a.libraryID;
+  });
 
+  sortedLibrary2.forEach(elem => {
+    return resultArray.push(
+      {
+        author: elem.author,
+        libraryID: elem.libraryID,
+        title: elem.title
+      });
+  });
 }
 sortObject();
+console.log(resultArray);
 
 //Expected Output:
 // [[object Object] {
